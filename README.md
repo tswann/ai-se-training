@@ -1,0 +1,3 @@
+# AI SE Training Exercises
+
+
