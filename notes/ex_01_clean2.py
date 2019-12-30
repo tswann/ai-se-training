@@ -1,4 +1,8 @@
 import datetime
+import logging
+import sys
+
+logging.basicConfig(level=logging.DEBUG)
 
 class LocationService:
 
@@ -8,13 +12,12 @@ class LocationService:
     def __init__(self, locations):
         self.locations = locations
 
-    @profile
     def _get_higher_rate_locations(self):
         return (location for location in self.locations if location.is_higher_rate())
 
-    @profile
     def get_location_coolness_results(self):
         for location in self._get_higher_rate_locations():
+            logging.debug(location)
             yield self.GOOD_RESULT if location.is_valid_category() else self.BAD_RESULT
 
 
@@ -36,7 +39,6 @@ class Location:
     def __repr__(self):
         return ', '.join(['{key}={value}'.format(key=key, value=self.__dict__.get(key)) for key in self.__dict__])
 
-@profile
 def run():
     current_date = datetime.date.today().strftime("%y-%m-%d")
     locations = (Location({'name':'Austin', 'rate':31, 'category':'AGH'}), 
@@ -45,8 +47,8 @@ def run():
     
     service = LocationService(locations)
     results = service.get_location_coolness_results()
-    print([result for result in results])
-    print('Process completed on ' + current_date)
+    logging.info([result for result in results])
+    logging.info('Process completed on ' + current_date)
 
 
 if __name__ == '__main__':
