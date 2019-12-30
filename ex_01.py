@@ -5,7 +5,7 @@ def process_seq(data):
     for item in data:
         if item['rate'] > 30:
             if item['category'] == 'GHT':
-                print('Do some cool processinig') 
+                print('Do some cool processing') 
             else:
                 print('This processing is less cool')
 
