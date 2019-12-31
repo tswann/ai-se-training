@@ -47,9 +47,12 @@ def run():
     
     service = LocationService(locations)
     results = service.get_location_coolness_results()
-    logging.info([result for result in results])
+    output_results(results)
     logging.info('Process completed on ' + current_date)
 
+
+def output_results(results: iter):
+    logging.info([result for result in results])
 
 if __name__ == '__main__':
     run()
