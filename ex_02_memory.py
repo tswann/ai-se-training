@@ -12,8 +12,8 @@ def run():
 
 @profile
 def using_lists(file_name):
-    file = open(file_name)
-    result = file.read().split("\n")
+    with open(file_name) as file:
+        result = file.read().split("\n")
     return result
 
 @profile
